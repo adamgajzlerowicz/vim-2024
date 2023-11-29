@@ -6,7 +6,7 @@ vim.g.startify_lists = {
 
 vim.g.startify_bookmarks = {
   {agilix = '~/projects/agilix'},
-  {vim_config = '~/.config/nvim/lua/custom/configs'},
+  {vim_config = '~/.config/nvim/lua/custom'},
   {console = '~/projects/cmp-main'},
 }
 

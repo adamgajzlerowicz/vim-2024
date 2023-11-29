@@ -5,11 +5,15 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "github_dark",
-  theme_toggle = { "doomchad", "one_light" },
+  -- theme = "chadtain",
+  theme = "everforest",
+  theme_toggle = { "blossom_light", "everforest" },
 
   hl_override = highlights.override,
   hl_add = highlights.add,
+  tabufline = {
+    enabled = false,
+  },
 }
 
 M.plugins = "custom.plugins"

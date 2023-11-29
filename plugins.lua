@@ -4,6 +4,7 @@ local overrides = require "custom.configs.overrides"
 local plugins = {
   {
     "Pocco81/TrueZen.nvim",
+    lazy = false,
     cmd = { "TZAtaraxis", "TZMinimalist" },
     config = function()
       -- require "custom.configs.truezen" -- just an example path
@@ -77,9 +78,27 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     opts = function()
       local conf = require "plugins.configs.telescope"
+
       conf.defaults.mappings.i = {
         ["<C-j>"] = require("telescope.actions").move_selection_next,
         ["<Esc>"] = require("telescope.actions").close,
+      }
+
+      conf.defaults.sorting_strategy = "descending"
+      conf.defaults.layout_strategy = "horizontal"
+
+      conf.pickers = {
+        buffers = {
+          sort_lastused = true,
+          sort_mru = true,
+          theme = "dropdown",
+          previewer = false,
+        },
+      }
+
+      conf.defaults.layout_config.vertical = {
+        prompt_position = "top",
+        mirror = true
       }
 
       return conf
@@ -102,6 +121,9 @@ local plugins = {
       vim.g.copilot_no_tab_map = true
       vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
     end,
+  },
+  {
+    "doums/darcula",
   },
 }
 

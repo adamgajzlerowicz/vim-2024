@@ -7,8 +7,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.opt.swapfile = false
 vim.opt.clipboard = ""
 
-
 vim.cmd [[
   autocmd VimLeavePre * :bufdo :update
 ]]
+
+vim.cmd [[
+  autocmd BufWritePre * %s/\s\+$//e
+]]
+  
 
