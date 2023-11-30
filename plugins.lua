@@ -1,20 +1,35 @@
 local overrides = require "custom.configs.overrides"
 
----@type NvPluginSpec[]
 local plugins = {
   {
     "Pocco81/TrueZen.nvim",
     lazy = false,
     cmd = { "TZAtaraxis", "TZMinimalist" },
     config = function()
-      -- require "custom.configs.truezen" -- just an example path
+      require("true-zen").setup {
+        modes = {
+          ataraxis = {
+            shade = "dark",
+            backdrop = 0.20,
+            minimum_writing_area = {
+              width = 90,
+              height = 44,
+            },
+            quit_untoggles = true,
+            padding = {
+              left = 30,
+              right = 30,
+              top = 1,
+              bottom = 1,
+            },
+          },
+        },
+      }
     end,
   },
-
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      -- format & linting
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -98,7 +113,7 @@ local plugins = {
 
       conf.defaults.layout_config.vertical = {
         prompt_position = "top",
-        mirror = true
+        mirror = true,
       }
 
       return conf
@@ -119,7 +134,6 @@ local plugins = {
     config = function()
       vim.g.copilot_assume_mapped = true
       vim.g.copilot_no_tab_map = true
-      vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
     end,
   },
   {
