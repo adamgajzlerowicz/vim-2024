@@ -14,5 +14,3 @@ vim.cmd [[
 vim.cmd [[
   autocmd BufWritePre * %s/\s\+$//e
 ]]
-
-vim.o.shortmess = vim.o.shortmess .. "F"

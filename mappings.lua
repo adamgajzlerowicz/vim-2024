@@ -4,7 +4,6 @@ local M = {}
 M.general = {
   i = {
     ["zz"] = { "<C-o>zz", "zz", opts = { nowait = true, silent = true } },
-    ["<c-j>"] = { "copilot#Accept('<CR>')", opts = { expr = true, silent = true, nowait = true } }
   },
 
   n = {
@@ -23,7 +22,5 @@ M.general = {
     ["<leader>y"] = { '"+y', "copy to system clubboard", opts = { nowait = true } },
   },
 }
-
--- more keybinds!
 
 return M

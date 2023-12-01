@@ -133,11 +133,52 @@ local plugins = {
     lazy = false,
     config = function()
       vim.g.copilot_assume_mapped = true
-      vim.g.copilot_no_tab_map = true
+      -- vim.g.copilot_no_tab_map = true
     end,
   },
   {
     "doums/darcula",
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      local conf = require "plugins.configs.cmp"
+      local cmp = require "cmp"
+
+      conf.mapping = {
+        ["<Tab>"] = nil,
+        ["<C-n>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif require("luasnip").expand_or_jumpable() then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+        ["<C-p>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif require("luasnip").jumpable(-1) then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+        ["<CR>"] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        },
+      }
+
+      return conf
+    end,
   },
 }
 
