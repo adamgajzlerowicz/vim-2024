@@ -14,3 +14,12 @@ vim.cmd [[
 vim.cmd [[
   autocmd BufWritePre * %s/\s\+$//e
 ]]
+
+vim.opt.autoread = true
+
+local autocmd = vim.api.nvim_create_autocmd -- alias for nvim_create_autocmd
+
+autocmd("FocusGained", {
+  pattern = "*",
+  command = "checktime",
+})

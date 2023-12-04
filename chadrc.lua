@@ -6,10 +6,13 @@ local highlights = require "custom.highlights"
 
 M.ui = {
   -- theme = "chadtain",
-  theme = "everforest",
-  theme_toggle = { "blossom_light", "everforest" },
+  theme = "aquarium",
+  hl_override = {
+    CursorLine = { bg = "#2a2e36" },
+  },
+  theme_toggle = { "blossom_light", "aquarium" },
 
-  hl_override = highlights.override,
+  -- hl_override = highlights.override,
   hl_add = highlights.add,
   tabufline = {
     enabled = false,
@@ -18,7 +21,6 @@ M.ui = {
 
 M.plugins = "custom.plugins"
 
--- check core.mappings for table structure
 M.mappings = require "custom.mappings"
 
 return M

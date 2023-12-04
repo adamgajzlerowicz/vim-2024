@@ -40,6 +40,12 @@ M.mason = {
   },
 }
 
+M.lazy = {
+  git = {
+    timeout = 400,
+  },
+}
+
 -- git support in nvimtree
 M.nvimtree = {
   git = {

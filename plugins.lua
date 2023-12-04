@@ -52,6 +52,9 @@ local plugins = {
         "html-lsp",
         "prettier",
         "stylua",
+        "typescript-language-server",
+        "eslint-lsp",
+        "prettierd",
       },
     },
   },
@@ -179,6 +182,76 @@ local plugins = {
 
       return conf
     end,
+  },
+
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require "custom.configs.lint"
+  --   end,
+  -- },
+  --
+
+  -- {
+  --   "mfussenegger/nvim-lint",
+  --   ft = {
+  --     "javascript",
+  --     "javascriptreact",
+  --   },
+  --   opts = {
+  --     linters_by_ft = {
+  --       javascript = { "eslint_d" },
+  --       javascriptreact = { "eslint_d" },
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     -- npm install -g eslint_d
+  --     local m = require "utils.vim"
+  --
+  --     local lint = require "lint"
+  --     lint.linters_by_ft = opts.linters_by_ft
+  --
+  --     m.autocmd({ "BufEnter", "BufWritePost" }, {
+  --       group = m.augroup "Lint",
+  --       callback = function()
+  --         require("lint").try_lint()
+  --       end,
+  --     })
+  --   end,
+  -- },
+
+  {
+    "dense-analysis/ale",
+    lazy = false,
+    config = function()
+      vim.g.ale_typescript_tsserver_use_global = false
+      vim.g.ale_fix_on_save = 1
+
+      -- vim.g.ale_javascript_eslint_executable = "eslint_d"
+
+      vim.g.ale_linters = {
+        typescript = { "eslint", "prettier" },
+        javascript = { "eslint", "prettier" },
+        typescriptreact = { "eslint", "prettier" },
+        javascriptreact = { "eslint", "prettier" },
+        astro = { "prettier" },
+      }
+
+      vim.g.ale_fixers = {
+        typescript = { "prettier" },
+        javascript = { "prettier" },
+        typescriptreact = { "prettier" },
+        javascriptreact = { "prettier" },
+        astro = { "prettier" },
+      }
+    end,
+  },
+  {
+    "folke/lazy.nvim",
+    opts = {
+      overrides.lazy,
+    },
   },
 }
 

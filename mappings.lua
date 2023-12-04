@@ -11,6 +11,7 @@ M.general = {
     vim.api.nvim_set_keymap("n", "<S-Tab>", ":NvimTreeToggle<CR>", { noremap = true, silent = true }),
     ["<leader>k"] = { ":lua vim.diagnostic.open_float() <CR>", "open float diagnostic", opts = { nowait = true } },
     ["<leader>o"] = { ":Startify<cr>", "startify", opts = { nowait = true } },
+    ["<leader>t"] = { ': lua require("nvterm.terminal").toggle "float" <cr>', "terminal", opts = { nowait = true } },
     ["<C-p>"] = { "<cmd>Telescope find_files<CR>", "find files", opts = { nowait = true } },
     ["<tab>"] = { "<cmd>Telescope buffers<CR>", "buffers", opts = { nowait = true } },
     ["<space>jj"] = { "<cmd>TZAtaraxis<CR>", "buffers", opts = { nowait = true } },
