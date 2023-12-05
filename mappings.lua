@@ -1,6 +1,15 @@
 ---@type MappingsTable
 local M = {}
 
+local function git_auto_push()
+  vim.cmd ":wa"
+  -- local message = vim.fn.input "Commit message: "
+  vim.cmd "!git add ."
+  -- vim.cmd("!git commit -m " .. vim.fn.shellescape(message))
+  vim.cmd "!git commit -m ..."
+  vim.cmd "!git push"
+end
+
 M.general = {
   i = {
     ["zz"] = { "<C-o>zz", "zz", opts = { nowait = true, silent = true } },
@@ -16,6 +25,9 @@ M.general = {
     ["<tab>"] = { "<cmd>Telescope buffers<CR>", "buffers", opts = { nowait = true } },
     ["<space>jj"] = { "<cmd>TZAtaraxis<CR>", "buffers", opts = { nowait = true } },
     ["<space>l"] = { ":wall<cr>", "buffers", opts = { nowait = true } },
+    ["<leader>p"] = { git_auto_push, "git auto push", opts = { nowait = true } },
+    ["<leader>u"] = { "<cmd>Telescope lsp_references<cr>", "lsp usages", opts = { nowait = true, silent = true } },
+    -- ["<leader>r"] = { "<cmd>Telescope lsp_references", "lsp usages", opts = { nowait = true, silent = true } },
   },
 
   v = {

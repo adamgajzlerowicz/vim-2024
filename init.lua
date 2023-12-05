@@ -23,3 +23,9 @@ autocmd("FocusGained", {
   pattern = "*",
   command = "checktime",
 })
+
+autocmd("FocusLost", {
+  pattern = "*",
+  command = ":wa",
+})
+

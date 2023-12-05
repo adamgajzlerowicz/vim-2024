@@ -75,6 +75,7 @@ local plugins = {
         "astro",
         "graphql",
         "gitignore",
+        "yaml",
       },
     },
   },
@@ -136,7 +137,9 @@ local plugins = {
     lazy = false,
     config = function()
       vim.g.copilot_assume_mapped = true
-      -- vim.g.copilot_no_tab_map = true
+      vim.g.copilot_filetypes = {
+        yaml = "v:true",
+      }
     end,
   },
   {
@@ -227,6 +230,9 @@ local plugins = {
     config = function()
       vim.g.ale_typescript_tsserver_use_global = false
       vim.g.ale_fix_on_save = 1
+      vim.g.ale_lint_on_text_changed = "never"
+      vim.g.ale_lint_on_insert_leave = 0
+      vim.g.ale_lint_on_enter = 0
 
       -- vim.g.ale_javascript_eslint_executable = "eslint_d"
 
