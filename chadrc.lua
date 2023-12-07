@@ -6,11 +6,11 @@ local highlights = require "custom.highlights"
 
 M.ui = {
   -- theme = "chadtain",
-  theme = "aquarium",
+  theme = "rosepine",
   hl_override = {
     CursorLine = { bg = "#2a2e36" },
   },
-  theme_toggle = { "blossom_light", "aquarium" },
+  theme_toggle = { "blossom_light", "rosepine" },
 
   -- hl_override = highlights.override,
   hl_add = highlights.add,

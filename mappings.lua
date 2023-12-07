@@ -24,7 +24,7 @@ M.general = {
     ["<C-p>"] = { "<cmd>Telescope find_files<CR>", "find files", opts = { nowait = true } },
     ["<tab>"] = { "<cmd>Telescope buffers<CR>", "buffers", opts = { nowait = true } },
     ["<space>jj"] = { "<cmd>TZAtaraxis<CR>", "buffers", opts = { nowait = true } },
-    ["<space>l"] = { ":wall<cr>", "buffers", opts = { nowait = true } },
+    ["<space>l"] = { ":wall<cr>", "buffers", opts = { nowait = true, silent = true } },
     ["<leader>p"] = { git_auto_push, "git auto push", opts = { nowait = true } },
     ["<leader>u"] = { "<cmd>Telescope lsp_references<cr>", "lsp usages", opts = { nowait = true, silent = true } },
     -- ["<leader>r"] = { "<cmd>Telescope lsp_references", "lsp usages", opts = { nowait = true, silent = true } },
