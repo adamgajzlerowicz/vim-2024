@@ -26,3 +26,4 @@ end
 vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = save_session,
 })
+-- g:startify_session_persistence

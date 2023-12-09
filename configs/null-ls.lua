@@ -3,34 +3,6 @@ local null_ls = require "null-ls"
 local b = null_ls.builtins
 
 local sources = {
-
-  -- b.formatting.deno_fmt,
-  -- b.formatting.prettierd.with {
-  --   -- filetypes = {
-  --     {
-  --       "javascript",
-  --       "javascriptreact",
-  --       "typescript",
-  --       "typescriptreact",
-  --       "vue",
-  --       "css",
-  --       "scss",
-  --       "less",
-  --       "html",
-  --       "json",
-  --       "jsonc",
-  --       "yaml",
-  --       "markdown",
-  --       "markdown.mdx",
-  --       "graphql",
-  --       "handlebars",
-  --     },
-  --   -- },
-  -- },
-  -- b.code_actions.eslint_d,
-  -- b.diagnostics.golangci_lint,
-
-  -- Lua
   b.formatting.stylua,
 }
 

@@ -153,6 +153,7 @@ local plugins = {
 
       conf.mapping = {
         ["<Tab>"] = nil,
+        ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-n>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -200,11 +201,16 @@ local plugins = {
     config = function()
       vim.g.neoformat_try_node_exe = 1
 
-      vim.api.nvim_create_autocmd({ "BufWritePre", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.astro", "*.css", "*.html", "*.json", "*.yaml" },
         command = "silent Neoformat",
       })
     end,
+  },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
   },
 }
 
