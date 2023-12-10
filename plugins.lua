@@ -124,12 +124,37 @@ local plugins = {
     end,
   },
 
+  -- {
+  --   "mhinz/vim-startify",
+  --   lazy = false,
+  --   config = function()
+  --     require "custom.configs.startify"
+  --   end,
+  -- },
+  --
+  -- {
+  --   "echasnovski/mini.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("mini.starter").setup()
+  --     require("mini.sessions").setup()
+  --   end,
+  -- },
+
   {
-    "mhinz/vim-startify",
+    "Shatur/neovim-session-manager",
     lazy = false,
     config = function()
-      require "custom.configs.startify"
+      require("session_manager").setup {
+        auto_session_enable_last_session = true,
+        -- auto_session_root_dir = vim.fn.stdpath "data" .. "/sessions/",
+        auto_session_enabled = true,
+        auto_save_enabled = true,
+        auto_restore_enabled = true,
+        auto_session_suppress_dirs = nil,
+      }
     end,
+    
   },
 
   {

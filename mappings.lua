@@ -18,15 +18,21 @@ M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
     vim.api.nvim_set_keymap("n", "<S-Tab>", ":NvimTreeToggle<CR>", { noremap = true, silent = true }),
-    ["<c-k>"] = { ":lua vim.diagnostic.open_float() <CR>", "open float diagnostic", opts = { nowait = true } },
+    ["<leader>d"] = { ":lua vim.diagnostic.open_float() <CR>", "open float diagnostic", opts = { nowait = true } },
     ["<leader>o"] = { ":Startify<cr>", "startify", opts = { nowait = true } },
     ["<C-p>"] = { "<cmd>Telescope find_files<CR>", "find files", opts = { nowait = true } },
     ["<tab>"] = { "<cmd>Telescope buffers<CR>", "buffers", opts = { nowait = true } },
     ["<leader>jj"] = { "<cmd>TZAtaraxis<CR>", "buffers", opts = { nowait = true } },
-    ["<leader>l"] = { ":wall<cr>", "buffers", opts = { nowait = true, silent = true } },
+    ["<leader>l"] = {
+      function()
+        vim.api.nvim_exec(":wall", true)
+      end,
+      "buffers",
+      opts = { nowait = true, silent = true },
+    },
     ["<leader>p"] = { git_auto_push, "git auto push", opts = { nowait = true } },
     ["<leader>u"] = { "<cmd>Telescope lsp_references<cr>", "lsp usages", opts = { nowait = true, silent = true } },
-    ["<leader>r"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "lsp rename", opts = { nowait = true, silent = true } },
+    ["<leader>e"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "lsp rename", opts = { nowait = true, silent = true } },
     ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
     ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
     ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
