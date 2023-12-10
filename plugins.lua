@@ -55,6 +55,7 @@ local plugins = {
         "typescript-language-server",
         "eslint-lsp",
         "prettierd",
+        "graphql",
       },
     },
   },
@@ -154,7 +155,6 @@ local plugins = {
         auto_session_suppress_dirs = nil,
       }
     end,
-    
   },
 
   {
