@@ -50,11 +50,9 @@ local plugins = {
       ensure_installed = {
         "lua-language-server",
         "html-lsp",
-        "prettier",
         "stylua",
         "typescript-language-server",
         "eslint-lsp",
-        "prettierd",
         "graphql",
       },
     },
@@ -125,35 +123,11 @@ local plugins = {
     end,
   },
 
-  -- {
-  --   "mhinz/vim-startify",
-  --   lazy = false,
-  --   config = function()
-  --     require "custom.configs.startify"
-  --   end,
-  -- },
-  --
-  -- {
-  --   "echasnovski/mini.nvim",
-  --   lazy = false,
-  --   config = function()
-  --     require("mini.starter").setup()
-  --     require("mini.sessions").setup()
-  --   end,
-  -- },
-
   {
-    "Shatur/neovim-session-manager",
+    "mhinz/vim-startify",
     lazy = false,
     config = function()
-      require("session_manager").setup {
-        auto_session_enable_last_session = true,
-        -- auto_session_root_dir = vim.fn.stdpath "data" .. "/sessions/",
-        auto_session_enabled = true,
-        auto_save_enabled = true,
-        auto_restore_enabled = true,
-        auto_session_suppress_dirs = nil,
-      }
+      require "custom.configs.startify"
     end,
   },
 
@@ -225,6 +199,27 @@ local plugins = {
     lazy = false,
     config = function()
       vim.g.neoformat_try_node_exe = 1
+
+      local function find_prettier_path()
+        local lspconfig_util = require "lspconfig/util"
+        local root_dir = lspconfig_util.find_git_ancestor(vim.fn.getcwd()) or vim.fn.getcwd()
+        local prettier_path = root_dir .. "/node_modules/.bin/prettier"
+        if vim.fn.executable(prettier_path) == 1 then
+          return prettier_path
+        else
+          return "prettier" -- Fallback to global prettier if local is not found
+        end
+      end
+
+      _G.foo = find_prettier_path
+
+      vim.g.neoformat_typescriptreact_prettier = vim.g.standard_prettier_settings
+      -- vim.g.neoformat_typescriptreact_prettier = {
+      --   exe = "/Users/adam/projects/agilix/packages/zawody/node_modules/.bin/prettier",
+      --   args = { "--stdin-filepath", "%:p", "--single-quote", "--no-semi" },
+      --   stdin = 1,
+      -- }
+      print "FOOOOOOO"
 
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.astro", "*.css", "*.html", "*.json", "*.yaml" },
