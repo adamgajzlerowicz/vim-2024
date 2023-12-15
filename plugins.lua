@@ -27,16 +27,48 @@ local plugins = {
       }
     end,
   },
+
   {
-    "neovim/nvim-lspconfig",
+    "aca/emmet-ls",
+    event = "BufEnter",
     dependencies = {
       {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "custom.configs.null-ls"
-        end,
+        "neovim/nvim-lspconfig",
       },
     },
+    config = function()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+      local lspconfig = require "lspconfig"
+      lspconfig.emmet_ls.setup {
+        capabilities = capabilities,
+        filetypes = {
+          "css",
+          "eruby",
+          "html",
+          "javascript",
+          "javascriptreact",
+          "less",
+          "sass",
+          "scss",
+          "svelte",
+          "pug",
+          "typescriptreact",
+          "vue",
+          "astro",
+        },
+        init_options = {
+          html = {
+            options = {},
+          },
+        },
+      }
+    end,
+  },
+
+  {
+    "neovim/nvim-lspconfig",
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
@@ -54,6 +86,8 @@ local plugins = {
         "typescript-language-server",
         "eslint-lsp",
         "graphql",
+        "emmet-ls",
+        "emmet-language-server",
       },
     },
   },
@@ -141,9 +175,7 @@ local plugins = {
       }
     end,
   },
-  {
-    "doums/darcula",
-  },
+
   {
     "hrsh7th/nvim-cmp",
     opts = function()
@@ -194,44 +226,34 @@ local plugins = {
     },
   },
 
-  {
-    "sbdchd/neoformat",
-    lazy = false,
-    config = function()
-      vim.g.neoformat_try_node_exe = 1
-
-      local function find_prettier_path()
-        local lspconfig_util = require "lspconfig/util"
-        local root_dir = lspconfig_util.find_git_ancestor(vim.fn.getcwd()) or vim.fn.getcwd()
-        local prettier_path = root_dir .. "/node_modules/.bin/prettier"
-        if vim.fn.executable(prettier_path) == 1 then
-          return prettier_path
-        else
-          return "prettier" -- Fallback to global prettier if local is not found
-        end
-      end
-
-      _G.foo = find_prettier_path
-
-      vim.g.neoformat_typescriptreact_prettier = vim.g.standard_prettier_settings
-      -- vim.g.neoformat_typescriptreact_prettier = {
-      --   exe = "/Users/adam/projects/agilix/packages/zawody/node_modules/.bin/prettier",
-      --   args = { "--stdin-filepath", "%:p", "--single-quote", "--no-semi" },
-      --   stdin = 1,
-      -- }
-      print "FOOOOOOO"
-
-      vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-        pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.astro", "*.css", "*.html", "*.json", "*.yaml" },
-        command = "silent Neoformat",
-      })
-    end,
-  },
+  -- {
+  --   "sbdchd/neoformat",
+  --   lazy = false,
+  --   config = function()
+  --     vim.g.neoformat_try_node_exe = 1
+  --
+  --
+  --     vim.g.neoformat_typescriptreact_prettier = vim.g.standard_prettier_settings
+  --
+  --     vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  --       pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.astro", "*.css", "*.html", "*.json", "*.yaml" },
+  --       command = "silent Neoformat",
+  --     })
+  --   end,
+  -- },
 
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
+
+  {
+    "mhartington/formatter.nvim",
+    lazy = false,
+    config = function()
+      require "custom.configs.formatter"
+    end,
+  }
 }
 
 return plugins
