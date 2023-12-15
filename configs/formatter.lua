@@ -12,26 +12,38 @@ local function find_prettier()
   return 'prettier'
 end
 
-require('formatter').setup({
-  filetype = {
-    typescriptreact = {
-      function()
-        return {
-          exe = find_prettier(),
-          args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
-          stdin = true,
-        }
-      end
-    },
+local filetypes = {
+  "lua",
+  "css",
+  "eruby",
+  "html",
+  "javascript",
+  "javascriptreact",
+  "less",
+  "sass",
+  "scss",
+  "svelte",
+  "pug",
+  "typescriptreact",
+  "typescript",
+  "vue",
+  "astro",
+}
 
-    typescript = {
-      function()
-        return {
-          exe = find_prettier(),
-          args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
-          stdin = true,
-        }
-      end
-    }
+local formatterConfig = {}
+for _, filetype in ipairs(filetypes) do
+  formatterConfig[filetype] = {
+    function()
+      return {
+        exe = find_prettier(),
+        args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
+        stdin = true
+      }
+    end
   }
+end
+
+require('formatter').setup({
+  filetype = formatterConfig
 })
+

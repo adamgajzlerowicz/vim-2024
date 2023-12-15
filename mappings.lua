@@ -25,7 +25,15 @@ M.general = {
     ["<leader>jj"] = { "<cmd>TZAtaraxis<CR>", "buffers", opts = { nowait = true } },
     ["<leader>l"] = {
       function()
-        vim.api.nvim_exec(":wall", true)
+        vim.api.nvim_exec(":Format", false)
+        local timer = vim.loop.new_timer()
+        timer:start(100, 200, vim.schedule_wrap(function()
+          if not vim.fn.getbufvar(0, '&modified') then
+            vim.api.nvim_exec(':wall', false)
+            timer:stop()
+            timer:close()
+          end
+        end))
       end,
       "buffers",
       opts = { nowait = true, silent = true },
