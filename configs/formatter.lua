@@ -1,17 +1,3 @@
--- local function find_prettier()
---   local filepath = vim.fn.expand "%:p"
---   local root = vim.loop.cwd()
---
---   while filepath and filepath ~= root do
---     filepath = vim.fn.fnamemodify(filepath, ":h")
---     local prettier_path = filepath .. "/node_modules/.bin/prettier"
---     if vim.fn.executable(prettier_path) == 1 then
---       return prettier_path
---     end
---   end
---   return "prettier"
--- end
-
 local filetypes = {
   "css",
   "eruby",
@@ -59,5 +45,5 @@ local format_augroup = vim.api.nvim_create_augroup("FormatAutogroup", { clear = 
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = format_augroup,
   pattern = "*",
-  command = "FormatWrite",
+  command = "silent FormatWrite",
 })

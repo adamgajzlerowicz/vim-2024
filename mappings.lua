@@ -25,8 +25,8 @@ M.general = {
     ["<leader>jj"] = { "<cmd>TZAtaraxis<CR>", "buffers", opts = { nowait = true } },
     ["<leader>l"] = {
       function()
-        vim.api.nvim_exec(":FormatWrite", false)
-        vim.api.nvim_command "wall"
+        vim.api.nvim_exec("silent FormatWrite", false)
+        vim.api.nvim_command "silent wall"
       end,
       "buffers",
       opts = { nowait = true, silent = true },

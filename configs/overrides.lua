@@ -15,9 +15,6 @@ M.treesitter = {
   },
   indent = {
     enable = true,
-    -- disable = {
-    --   "python"
-    -- },
   },
 }
 
@@ -46,7 +43,6 @@ M.lazy = {
   },
 }
 
--- git support in nvimtree
 M.nvimtree = {
   git = {
     enable = true,
