@@ -12,17 +12,6 @@ local consoleLog = snippet("cl", {
 
 
 luasnip.snippets = {
-  {
-    "pocco81/auto-save.nvim",
-    lazy = false,
-    config = function()
-      require("auto-save").setup {
-        trigger_events = { "VimLeavePre" },
-        enabled = true,
-        write_all_buffers = true,
-      }
-    end,
-  },
   javascript = { consoleLog },
   typescript = { consoleLog },
   javascriptreact = { consoleLog },
