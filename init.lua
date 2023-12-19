@@ -28,10 +28,12 @@ autocmd("FocusGained", {
 
 autocmd("FocusLost", {
   pattern = "*",
-  command = "silent :wa",
+  command = "silent! wa",
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*",
   command = "highlight Visual guibg=#E76F51 guifg=#000000",
 })
+
+vim.opt.mouse = ""

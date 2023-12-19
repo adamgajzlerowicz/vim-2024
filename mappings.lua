@@ -4,7 +4,7 @@ local M = {}
 local function git_auto_push()
   vim.cmd ":wa"
   -- local message = vim.fn.input "Commit message: "
-  vim.cmd "!git add ."
+  vim.cmd "!git add --all"
   -- vim.cmd("!git commit -m " .. vim.fn.shellescape(message))
   vim.cmd "!git commit -m ..."
   vim.cmd "!git push"
@@ -26,8 +26,7 @@ M.general = {
     ["<leader>l"] = {
       function()
         vim.api.nvim_exec(":FormatWrite", false)
-        
-        -- vim.api.nvim_exec(":wa", false)
+        vim.api.nvim_command "wall"
       end,
       "buffers",
       opts = { nowait = true, silent = true },
@@ -46,6 +45,12 @@ M.general = {
       end,
       "Blame line",
     },
+    ["<leader>fs"] = {
+      "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+      "search",
+      opts = { nowait = true, silent = true },
+    },
+    ["<Esc>"] = { "<cmd> noh | cclose <CR>", "Clear highlights" },
   },
 
   v = {

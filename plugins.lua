@@ -29,45 +29,6 @@ local plugins = {
   },
 
   {
-    "aca/emmet-ls",
-    event = "BufEnter",
-    dependencies = {
-      {
-        "neovim/nvim-lspconfig",
-      },
-    },
-    config = function()
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-      local lspconfig = require "lspconfig"
-      lspconfig.emmet_ls.setup {
-        capabilities = capabilities,
-        filetypes = {
-          "css",
-          "eruby",
-          "html",
-          "javascript",
-          "javascriptreact",
-          "less",
-          "sass",
-          "scss",
-          "svelte",
-          "pug",
-          "typescriptreact",
-          "vue",
-          "astro",
-        },
-        init_options = {
-          html = {
-            options = {},
-          },
-        },
-      }
-    end,
-  },
-
-  {
     "neovim/nvim-lspconfig",
     config = function()
       require "plugins.configs.lspconfig"
@@ -178,6 +139,43 @@ local plugins = {
 
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      {
+        -- snippet plugin
+        "L3MON4D3/LuaSnip",
+        -- dependencies = "rafamadriz/friendly-snippets",
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("plugins.configs.others").luasnip(opts)
+        end,
+      },
+
+      -- autopairing of (){}[] etc
+      {
+        "windwp/nvim-autopairs",
+        opts = {
+          fast_wrap = {},
+          disable_filetype = { "TelescopePrompt", "vim" },
+        },
+        config = function(_, opts)
+          require("nvim-autopairs").setup(opts)
+
+          -- setup cmp for autopairs
+          local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+          require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        end,
+      },
+
+      -- cmp sources plugins
+      {
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+      },
+    },
     opts = function()
       local conf = require "plugins.configs.cmp"
       local cmp = require "cmp"
@@ -215,32 +213,26 @@ local plugins = {
         },
       }
 
+      conf.sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "path" },
+      }
+
       return conf
     end,
+    config = function(_, opts)
+      require("cmp").setup(opts)
+    end,
   },
-
   {
     "folke/lazy.nvim",
     opts = {
       overrides.lazy,
     },
   },
-
-  -- {
-  --   "sbdchd/neoformat",
-  --   lazy = false,
-  --   config = function()
-  --     vim.g.neoformat_try_node_exe = 1
-  --
-  --
-  --     vim.g.neoformat_typescriptreact_prettier = vim.g.standard_prettier_settings
-  --
-  --     vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  --       pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.astro", "*.css", "*.html", "*.json", "*.yaml" },
-  --       command = "silent Neoformat",
-  --     })
-  --   end,
-  -- },
 
   {
     "christoomey/vim-tmux-navigator",
@@ -253,7 +245,22 @@ local plugins = {
     config = function()
       require "custom.configs.formatter"
     end,
-  }
+  },
+
+  {
+    "roobert/tailwindcss-colorizer-cmp.nvim",
+    lazy = false,
+    config = function()
+      require("tailwindcss-colorizer-cmp").setup {
+        color_square_width = 2,
+      }
+    end,
+  },
+
+  {
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    lazy = false,
+  },
 }
 
 return plugins
