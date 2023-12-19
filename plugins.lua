@@ -227,6 +227,25 @@ local plugins = {
     "rafamadriz/friendly-snippets",
     enabled = false,
   },
+
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = false,
+    config = function()
+      require "custom.configs.luasnip"
+    end,
+  },
+
+  {
+    "pocco81/auto-save.nvim",
+    lazy = false,
+    config = function()
+      require("auto-save").setup {
+        enabled = true,
+        write_all_buffers = true,
+      }
+    end,
+  },
 }
 
 return plugins
