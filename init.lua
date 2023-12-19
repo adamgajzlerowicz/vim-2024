@@ -8,7 +8,7 @@ vim.opt.swapfile = false
 vim.opt.clipboard = ""
 
 vim.cmd [[
-  autocmd VimLeavePre * :bufdo :update
+  autocmd VimLeavePre * silent :bufdo :update
 ]]
 
 vim.cmd [[
@@ -35,4 +35,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 vim.opt.mouse = ""
-
