@@ -185,8 +185,8 @@ local plugins = {
       }
 
       conf.sources = {
-        { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "nvim_lsp" },
         { name = "buffer" },
         { name = "nvim_lua" },
         { name = "path" },
@@ -205,12 +205,12 @@ local plugins = {
 
   {
     "christoomey/vim-tmux-navigator",
-    lazy = false,
+    event = "InsertEnter",
   },
 
   {
     "mhartington/formatter.nvim",
-    lazy = false,
+    event = "InsertEnter",
     config = function()
       require "custom.configs.formatter"
     end,
@@ -218,7 +218,7 @@ local plugins = {
 
   {
     "roobert/tailwindcss-colorizer-cmp.nvim",
-    lazy = false,
+    event = "InsertEnter",
     config = function()
       require("tailwindcss-colorizer-cmp").setup {
         color_square_width = 2,
@@ -228,12 +228,22 @@ local plugins = {
 
   {
     "nvim-telescope/telescope-live-grep-args.nvim",
-    lazy = false,
+    event = "InsertEnter",
   },
 
   {
     "rafamadriz/friendly-snippets",
     enabled = false,
+  },
+
+  -- {
+  --   "SirVer/ultisnips",
+  --   event = "InsertEnter",
+  -- }
+  --
+  {
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    event = "InsertEnter",
   },
 }
 

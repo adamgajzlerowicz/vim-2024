@@ -1,3 +1,5 @@
+-- local lga_actions = require "telescope-live-grep-args.actions"
+
 ---@type MappingsTable
 local M = {}
 
@@ -13,6 +15,8 @@ end
 M.general = {
   i = {
     ["zz"] = { "<C-o>zz", "zz", opts = { nowait = true, silent = true } },
+--   ["<C-k>"] = lga_actions.quote_prompt(),
+--   ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
   },
 
   n = {
