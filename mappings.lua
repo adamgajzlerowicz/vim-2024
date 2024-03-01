@@ -15,11 +15,16 @@ end
 M.general = {
   i = {
     ["zz"] = { "<C-o>zz", "zz", opts = { nowait = true, silent = true } },
---   ["<C-k>"] = lga_actions.quote_prompt(),
---   ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
   },
 
   n = {
+    -- ["<leader>qa"] = {
+    --   "<cmd>lua require("persistence").load()<cr>"
+    --   "quit all",
+    --   opts = { nowait = true },
+    -- },
+    -- ["<leader>qs"] = { [[<cmd>lua require("persistence").load()<cr>]], "load session", opts = { nowait = true } },
+
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
     vim.api.nvim_set_keymap("n", "<S-Tab>", ":NvimTreeToggle<CR>", { noremap = true, silent = true }),
     ["<leader>d"] = { ":lua vim.diagnostic.open_float() <CR>", "open float diagnostic", opts = { nowait = true } },
@@ -38,10 +43,10 @@ M.general = {
     ["<leader>p"] = { git_auto_push, "git auto push", opts = { nowait = true } },
     ["<leader>u"] = { "<cmd>Telescope lsp_references<cr>", "lsp usages", opts = { nowait = true, silent = true } },
     ["<leader>e"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "lsp rename", opts = { nowait = true, silent = true } },
-    ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
-    ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
-    ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
-    ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
+    -- ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
+    -- ["<C-l>"] = { "<cmd> TmuxNavigateRight<CR>", "window right" },
+    -- ["<C-j>"] = { "<cmd> TmuxNavigateDown<CR>", "window down" },
+    -- ["<C-k>"] = { "<cmd> TmuxNavigateUp<CR>", "window up" },
     ["<leader>k"] = { "<cmd> Telescope git_status <CR>", "Git status" },
     ["<leader>b"] = {
       function()

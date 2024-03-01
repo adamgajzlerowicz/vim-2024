@@ -245,6 +245,19 @@ local plugins = {
     "nvim-telescope/telescope-live-grep-args.nvim",
     event = "InsertEnter",
   },
+
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    lazy = false,
+    opts = {
+      -- add any custom options here
+    },
+  },
+  {
+    "ThePrimeagen/harpoon",
+    event = "BufReadPre",
+  },
 }
 
 return plugins

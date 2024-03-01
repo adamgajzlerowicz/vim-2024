@@ -17,3 +17,4 @@ vim.g.startify_session_delete_buffers = 1
 vim.g.startify_change_to_vcs_root = 1
 vim.g.startify_enable_special = 0
 vim.g.startify_session_dir = "~/.config/nvim/session"
+
